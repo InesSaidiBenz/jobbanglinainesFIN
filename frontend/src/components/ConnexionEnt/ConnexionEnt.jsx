@@ -16,17 +16,16 @@ function ConnexionEnt() {
     
     // Vérifiez si l'email est dans la liste des employeurs
     const employer = EmployersList.find(emp => emp.email === email && emp.password === password);
-
-    
+  
     if (employer) {
       console.log(`Logging in as ${userType} with email: ${email}`);
-      // Ici vous pouvez ajouter la vérification du mot de passe si nécessaire
-      // Si vous avez un mot de passe à vérifier, faites-le ici
-      navigate('/ent'); // Rediriger vers la page entreprise après connexion réussie
+      // Si l'authentification est réussie, rediriger vers la page entreprise avec l'email
+      navigate('/ent', { state: { connectedEmployerEmail: email } }); // Passe l'email ici
     } else {
       setErrorMessage("Email ou mot de passe incorrect."); // Définir le message d'erreur
     }
   };
+  
 
   return (
     <div>
