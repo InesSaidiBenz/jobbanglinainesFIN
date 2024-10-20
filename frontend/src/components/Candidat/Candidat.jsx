@@ -3,6 +3,7 @@ import "./Candidat.css";
 import NavBarCand from '../NavBarCand/NavBarCand';
 import { locations } from '../../data/locations';
 import EmploiItem from '../EmploiItem/EmploiItem';
+import EmploiDetails from "./EmploiDetails"
 
 export const Candidat = ({ likedJobs, setLikedJobs }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -27,6 +28,8 @@ export const Candidat = ({ likedJobs, setLikedJobs }) => {
     setLocation('');
     setIsSearched(false);
   };
+
+  
 
   return (
     <div className="candidat-container">
@@ -58,6 +61,11 @@ export const Candidat = ({ likedJobs, setLikedJobs }) => {
         {isSearched && <EmploiItem searchTerm={searchTerm} location={location} likedJobs={likedJobs} setLikedJobs={setLikedJobs} />}
       </div>
     </div>
+
+
+
+
+
   );
 };
 

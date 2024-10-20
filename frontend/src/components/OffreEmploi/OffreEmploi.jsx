@@ -1,7 +1,8 @@
-import React, { useState } from "react"; 
+import React, { useEffect, useState } from "react"; 
 import NavBarEnt from "../NavBarEnt/NavBarEnt";
 import { locations } from '../../data/locations'; // Importer la liste des lieux
 import "./OffreEmploi.css";
+
 
 function OffreEmploi() {
   const [showForm, setShowForm] = useState(true);
@@ -11,6 +12,7 @@ function OffreEmploi() {
   const [location, setLocation] = useState(locations[0]);  // Utiliser la première location par défaut
   const [category, setCategory] = useState("Technologie");
   const [employerEmail, setEmployerEmail] = useState("");
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +33,9 @@ function OffreEmploi() {
     setShowForm(true);
   };
 
+
   return (
+
     <div className="entreprise-container">
       <NavBarEnt />
       <div className="content">
@@ -135,6 +139,7 @@ function OffreEmploi() {
         )}
       </div>
     </div>
+  
   );
 }
 

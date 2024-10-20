@@ -35,7 +35,7 @@ app.listen(process.env.PORT, () => {
 
 //app.get()
 app.get('/', (req, res) => {
-    res.json({mggs: 'Hi nigger.... OHHH!!'}); // Exemple de route
+    res.json({mggs: 'Hi .... OHHH!!'}); // Exemple de route
 });
 
 
