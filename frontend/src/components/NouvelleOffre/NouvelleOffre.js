@@ -1,10 +1,12 @@
 //creation offre d'emploi fetch
 
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import NavBarEnt from "../NavBarEnt/NavBarEnt";
 import './NouvelleOffre.css'
+import { useEmploiContext } from "../../hooks/useEmploiContext";
 
 const NouvelleOffre = () =>{
+    const {dispatch} = useEmploiContext()
     const[nomEntreprise, setNomEntreprise] = useState('')
     const[nomPoste, setNomPoste] = useState('')
     const[salaire, setSalaire] = useState('')
@@ -47,6 +49,7 @@ const handleSubmit = async (e) => {
             setEmailEmployeur('')
             setError(null)
             console.log('Offre Ajouter mon amour')
+            dispatch({type: 'CREATE_EMPLOIS', payload:json})
         }
     }
 

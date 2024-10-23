@@ -11,6 +11,8 @@
                   <span className="jobSector">{emploi.categorie}</span>
                   <span className="jobSalary">{emploi.salaire}</span>
                   <span className="jobLocation">{emploi.emplacement}</span>
+                  <span className="jobEmail">{emploi.email_employeur}</span>
+
                   <p>{emploi.createdAt}</p>
 
                  

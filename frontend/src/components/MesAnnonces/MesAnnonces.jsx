@@ -1,25 +1,13 @@
-import React, { useState,useEffect } from "react";
-import { EmploiList } from "../../data/emploi";
+import React, { useEffect } from "react";
 import EmploiDetails from "./EmploiDetails"
 import "./MesAnnonces.css";
-import OffreEmploi from "../OffreEmploi/OffreEmploi";
 import NouvelleOffre from "../NouvelleOffre/NouvelleOffre";
-const MesAnnonces = ({ connectedEmployerEmail }) => {
-  //const [emplois, setEmplois] = useState(EmploiList);
-  const [emplois, setEmplois] = useState(null);
+import { useEmploiContext } from "../../hooks/useEmploiContext";
 
-/*
-  const handleDelete = (emploiToDelete) => {
-    setEmplois(emplois.filter((emploi) => emploi !== emploiToDelete));
-  };
-  */
-/*
-  // Filtrer les emplois selon l'employeur connecté
-  const filteredEmploiList = emplois.filter(
-    (emploi) => emploi.email_employeur === connectedEmployerEmail
-  );
-*/
-  const filteredEmploiList = emplois ? emplois.filter(
+
+const MesAnnonces = ({ connectedEmployerEmail }) => {
+   const {emplois, dispatch}= useEmploiContext()
+   const filteredEmploiList = emplois ? emplois.filter(
     (emploi) => emploi.email_employeur === connectedEmployerEmail
   ) : [];
 
@@ -36,13 +24,15 @@ const fetchEmploi = async()=>{
   const json = await response.json()
 
   if(response.ok){
-      setEmplois(json)
+     // setEmplois(json)
+     dispatch({type: 'SET_EMPLOIS', payload:json})
   }
 }
 
 fetchEmploi()
 
-},[])
+},[dispatch])
+
 
 return (
   <div>
