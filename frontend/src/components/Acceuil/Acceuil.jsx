@@ -14,6 +14,7 @@ const Acceuil = () => {
       .catch(error => console.error('Erreur:', error));
   }, []);
 
+  //hellooooo git test
   return (
     <div className="home-container">
       <NavBar />
