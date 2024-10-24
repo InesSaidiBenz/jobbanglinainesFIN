@@ -94,7 +94,7 @@
     transform: scale(1.05);
   }
   
-  .offre-emploi-container::after {
+  .emploi-container-details:after {
     content: '';
     position: absolute;
     top: -10px;
@@ -108,7 +108,7 @@
     transition: opacity 0.3s;
   }
   
-  .offre-emploi-container:hover::after {
+  .emploi-container-details:hover::after {
     opacity: 0.2;
   }
   

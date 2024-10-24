@@ -21,7 +21,7 @@ const candidatSchema = new Schema({
 
  
 
-    const Candidat = mongoose.model('Candidat', canadidatSchema);
+    const Candidat = mongoose.model('Candidat', candidatSchema);
     export default Candidat;
 
 

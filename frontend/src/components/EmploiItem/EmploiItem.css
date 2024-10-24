@@ -14,6 +14,7 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  z-index: 1; /* Make sure this is lower than the popups */
   
 }
 
@@ -66,7 +67,7 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 9999; /* Ensure it's above all other elements */
   transition: none; /* Désactiver les transitions */
   animation: none; /* Désactiver les animations */
 }
@@ -80,6 +81,7 @@ button:hover {
   width: 80%; /* Ajuster pour un meilleur affichage sur mobile */
   transition: none; /* Désactiver les transitions */
   animation: none; /* Désactiver les animations */
+  z-index: 10000;
 }
 
 .close {
@@ -110,6 +112,7 @@ button:hover {
   padding: 20px; /* Ajuste si nécessaire */
   border: 1px solid #ccc; /* Exemple de style */
   margin-bottom: -40px; /* Exemple de style */
+  z-index: 1; /* Make sure this is lower than the popups */
 }
 
 .like-icon {
@@ -126,7 +129,7 @@ button:hover {
 }
 .details-popup {
   position: fixed;
-  top: 0;
+  top: 5;
   left: 0;
   right: 0;
   bottom: 0;
@@ -137,6 +140,7 @@ button:hover {
   z-index: 2000; /* Plus élevé que les autres éléments */
   transition: none; /* Désactiver les transitions */
   animation: none; /* Désactiver les animations */
+  border-color: #333;
 }
 
 
@@ -145,13 +149,23 @@ button:hover {
   padding: 15px;
   border-radius: 5px;
   position: relative;
-  max-width: 700px; /* Largeur maximale */
-  width: 90%; /* Ajuste pour les petits écrans */
-  max-height: 80vh; /* Limiter la hauteur pour éviter d'être trop grand */
+  max-width: 70000px; /* Largeur maximale */
   overflow-y: auto; /* Permet le défilement vertical */
   overflow-x: hidden; /* Empêche le défilement horizontal */
   transition: none; /* Désactiver les transitions */
   animation: none; /* Désactiver les animations */
+  border-color: #333;
+  border: 1px solid #ddd;
+  position: relative;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px 0;
+  transition: box-shadow 0.3s;
+  max-width: 3000px; /* Augmenter la largeur maximale */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  z-index: 10000; /* Same as above */
 }
 
 .details-content {
@@ -159,6 +173,7 @@ button:hover {
   overflow-y: auto; /* Permet le défilement vertical */
   transition: none; /* Désactiver les transitions */
   animation: none; /* Désactiver les animations */
+  border-color: #333;
 }
 
 
@@ -177,4 +192,5 @@ button:hover {
 .details-popup p {
   animation: none; /* Désactiver l'animation */
   transition: none; /* Désactiver les transitions */
+  
 }
