@@ -29,11 +29,11 @@ const avoirOffre = async(req,res) => {
 //cree une offre
 const creeOffre = async(req,res) =>
      {
-    const{nom_entreprise,nom_poste,salaire,emplacement,categorie,email_employeur} = req.body;
+    const{nom_entreprise,nom_poste,salaire,emplacement,categorie,email_employeur, description, responsabilite, exigence} = req.body;
 
 try{
     const emploi = await OffreEmploi.create({
-        nom_entreprise,nom_poste,salaire,emplacement,categorie,email_employeur
+        nom_entreprise,nom_poste,salaire,emplacement,categorie,email_employeur, description, responsabilite, exigence
     });
     res.status(200).json(emploi);
     }catch(error){

@@ -12,6 +12,11 @@
                   <span className="jobSalary">{emploi.salaire}</span>
                   <span className="jobLocation">{emploi.emplacement}</span>
                   <span className="jobEmail">{emploi.email_employeur}</span>
+                  <span className="jobEmail">{emploi.description}</span>
+                  <span className="jobEmail">{emploi.responsabilite}</span>
+                  <span className="jobEmail">{emploi.exigence}</span>
+
+
 
                   <p>{emploi.createdAt}</p>
 

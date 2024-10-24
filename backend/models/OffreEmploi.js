@@ -26,6 +26,18 @@ const offreSchema = new Schema({
       email_employeur: {
         type: String,
         required: true
+      }, 
+      description: {
+        type: String,
+        required: true
+      }, 
+      responsabilite: {
+        type: String,
+        required: true
+      },
+      exigence: {
+        type: String,
+        required: true
       }
     }, { timestamps: true });
 

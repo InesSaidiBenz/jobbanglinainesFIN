@@ -13,6 +13,10 @@ const NouvelleOffre = () =>{
     const[emplacement, setEmplacement] = useState('')
     const[categorie, setCategorie] = useState('')
     const[emailEmployeur, setEmailEmployeur] = useState('')
+    const[description, setDescription] = useState('')
+    const[responsabilite, setResponsabilite] = useState('')
+    const[exigence, setExigence] = useState('')
+
     const[error, setError] = useState(null)
 
 
@@ -25,7 +29,10 @@ const handleSubmit = async (e) => {
         salaire: salaire,
         emplacement: emplacement,
         categorie: categorie,
-        email_employeur: emailEmployeur}
+        email_employeur: emailEmployeur, 
+        description: description,
+        responsabilite: responsabilite,
+        exigence:exigence}
 
 
         const response = await fetch('/api/offreEmploi/', {
@@ -47,6 +54,9 @@ const handleSubmit = async (e) => {
             setEmplacement('')
             setCategorie('')
             setEmailEmployeur('')
+            setDescription('')
+            setResponsabilite('')
+            setExigence('')
             setError(null)
             console.log('Offre Ajouter mon amour')
             dispatch({type: 'CREATE_EMPLOIS', payload:json})
@@ -101,6 +111,7 @@ const handleSubmit = async (e) => {
                     required
 
                   >
+                    <option value="">Sélectionnez un emplacement</option> 
                     <option value="Montréal">Montréal</option>
                     <option value="Québec">Québec</option>
                     <option value="Laval">Laval</option>
@@ -122,6 +133,7 @@ const handleSubmit = async (e) => {
                     value={categorie}
                     required
                   >
+                    <option value="">Sélectionnez une categorie</option> 
                     <option value="Technologie">Technologie</option>
                     <option value="Santé">Santé</option>
                     <option value="Environnement">Environnement</option>
@@ -141,6 +153,37 @@ const handleSubmit = async (e) => {
                     type="email"
                     onChange={(e) => setEmailEmployeur(e.target.value)}                    
                     value={emailEmployeur}
+                    required
+                  />
+                </div>
+
+
+                <div className="input-group">
+                  <label>Description du poste</label>
+                  <input
+                    type="text"
+                    onChange={(e) => setDescription(e.target.value)}                    
+                    value={description}
+                    required
+                  />
+                </div>
+
+                <div className="input-group">
+                  <label>Responsabilité</label>
+                  <input
+                    type="text"
+                    onChange={(e) => setResponsabilite(e.target.value)}                    
+                    value={responsabilite}
+                    required
+                  />
+                </div>
+
+                <div className="input-group">
+                  <label>Exigence</label>
+                  <input
+                    type="text"
+                    onChange={(e) => setExigence(e.target.value)}                    
+                    value={exigence}
                     required
                   />
                 </div>
