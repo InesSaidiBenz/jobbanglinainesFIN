@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import bcrypt from ('bcrypt')
+import bcrypt from 'bcrypt'
+import validator from 'validator'
 
 
 const Schema = mongoose.Schema;
@@ -33,7 +34,7 @@ const entrepriseSchema = new Schema({
 
 
 
- entrepriseSchema.statics.signupEntreprise = async function(
+ entrepriseSchema.statics.inscriptionEntreprise = async function(
     nom_entreprise,
     nom_employeur,
     email_entreprise,
@@ -41,6 +42,19 @@ const entrepriseSchema = new Schema({
     adresse,
     mot_de_passeEntreprise
  ) {
+
+    //validation:
+    if(!email_entreprise || !mot_de_passeEntreprise){ 
+        throw Error('tous les champs doivent être remplis')
+    }
+    if(!validator.isEmail(email_entreprise)){
+        throw Error('email entreprise invalide')
+    }
+    if(!validator.isStrongPassword(mot_de_passeEntreprise)){
+        throw Error('mot de passe entreprise invalide')
+    }
+
+
     const exists = await this.findOne({email_entreprise})
 
     if(exists){
