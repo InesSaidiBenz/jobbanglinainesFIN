@@ -9,7 +9,8 @@ const candidatSchema = new Schema({
       },
       email_candidat: {
         type: String,
-        required: true
+        required: true,
+        unique:true
       },
      mot_de_passe: {
         type: String,
