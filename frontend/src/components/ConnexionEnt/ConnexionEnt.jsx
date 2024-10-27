@@ -2,7 +2,171 @@ import React, { useState } from "react";
 import "./ConnexionEnt.css";
 import NavBar from '../NavBar/NavBar';
 import { useNavigate } from 'react-router-dom'; // Pour naviguer après la connexion
-import { EmployersList } from '../../data/employers'; // Assurez-vous que le chemin est correct
+//import { EmployersList } from '../../data/employers'; //// Assurez-vous que le chemin est correct
+
+ // Pour naviguer après la soumission
+import { useEntrepriseContext } from "../../hooks/useEntrepriseContext";
+
+
+const ConnexionEnt = () => {
+  const {dispatch} = useEntrepriseContext()
+  const [emailEntreprise, setEmailEntreprise]= useState('')
+  const [mot_de_passeEntreprise,setMDPentreprise]= useState('')
+
+  const[error, setError] = useState(null)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log( emailEntreprise, mot_de_passeEntreprise)
+
+
+const entreprise = {
+  emailEntreprise:emailEntreprise,
+  mot_de_passeEntreprise:mot_de_passeEntreprise
+
+}
+
+const response = await fetch('/api/entreprise/', {
+  method:'POST',
+  body: JSON.stringify(entreprise),
+  headers:{
+      'Content-Type': 'application/json'
+  }
+})
+const json = await response.json()
+
+if(!response.ok){
+      setError(json.error)
+}
+if(response.ok){
+  setEmailEntreprise('')
+  setMDPentreprise('')
+  setError(null)
+  console.log('compte entreprise connecter mon amour')
+  dispatch({type: 'LOGINENTREPRISE', payload:json})
+}
+
+}
+
+
+  return (
+
+    <div>
+      <NavBar />
+      <div className="connexion-container">
+        <h2>Connexion</h2>
+        <p>Employeur</p>
+        <form onSubmit={handleSubmit}>
+
+         
+          <div className="input-group">
+            <label>Email</label>
+            <input
+              type="email"
+              value={emailEntreprise}
+              onChange={(e) => setEmailEntreprise(e.target.value)}
+              required
+            />
+          </div>
+      
+          <div className="input-group">
+            <label>Mot de passe</label>
+            <input
+              type="password"
+              value={mot_de_passeEntreprise}
+              onChange={(e) => setMDPentreprise(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="submit-btn">Se connecter</button>
+        </form>
+
+        <div className="signup">
+          <p>Pas de compte avec nous ?</p>
+          <br />
+          <a href="./inscent">
+            <button className="signup-btn">Créer un compte</button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  )
+}
+
+export default ConnexionEnt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
 
 function ConnexionEnt() {
   const [userType] = useState("Employeur");
@@ -55,8 +219,11 @@ function ConnexionEnt() {
             />
           </div>
           <button className="login-btn"type="submit">Se connecter</button>
-          {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Afficher le message d'erreur */}
-        </form>
+   *//*
+         {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Afficher le message d'erreur */
+      /*
+         </form>
+
         
         <div className="signup">
           <p>Pas de compte avec nous ?</p>
@@ -71,3 +238,4 @@ function ConnexionEnt() {
 }
 
 export default ConnexionEnt;
+*/

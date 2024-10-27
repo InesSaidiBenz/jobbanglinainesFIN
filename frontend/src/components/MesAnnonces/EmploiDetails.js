@@ -1,122 +1,65 @@
 import { useState } from 'react';
-<<<<<<< HEAD
 import { useEmploiContext } from "../../hooks/useEmploiContext";
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import "./EmploiDetails.css";
+import edit from '../../images/edit.png';
+import { locations } from '../../data/locations';
 
 const EmploiDetail = ({ emploi }) => {
   const { dispatch } = useEmploiContext();
-  const [showDetails, setShowDetails] = useState(false); // État pour afficher/masquer les détails
-
-  const handleClick = async () => {
-    const response = await fetch('/api/offreEmploi/' + emploi._id, {
-      method: 'DELETE',
-    });
-
-    const json = await response.json();
-
-    if (response.ok) {
-      console.log('Suppression réussie:', json);
-      dispatch({ type: 'DELETE_EMPLOIS', payload: json });
-    }
-  };
-
-  // Fonction pour basculer l'affichage des détails
-=======
-import { useEmploiContext } from "../../hooks/useEmploiContext"; // Hook pour accéder au contexte de l'emploi et le dispatcher
-import "./EmploiDetails.css";
-import edit from '../../images/edit.png';
-import { locations } from '../../data/locations'; // Liste des emplacements possibles pour les emplois
-
-// Composant EmploiDetail qui affiche les détails d'une offre d'emploi
-const EmploiDetail = ({ emploi }) => {
-  const { dispatch } = useEmploiContext(); // Utilise le dispatcher du contexte pour les actions de modification
-  const [showDetails, setShowDetails] = useState(false); // Gère l'affichage des détails de l'emploi
-  const [showEmail, setShowEmail] = useState(false); // Gère l'affichage de l'email de l'employeur
-  const [loading, setLoading] = useState(false); // Gère l'état de chargement lors de la suppression de l'emploi
-  const [error, setError] = useState(null); // Stocke les erreurs en cas de problème
-  const [isEditing, setIsEditing] = useState(false); // Gère le mode édition
-  const [editedEmploi, setEditedEmploi] = useState({ ...emploi }); // Stocke les modifications apportées à l'emploi
+  const [showDetails, setShowDetails] = useState(false);
+  const [showEmail, setShowEmail] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedEmploi, setEditedEmploi] = useState({ ...emploi });
 
   // Fonction pour supprimer l'emploi
   const handleClick = async () => {
     setLoading(true);
-    setError(null); // Réinitialise les erreurs
+    setError(null);
     const response = await fetch('/api/offreEmploi/' + emploi._id, {
       method: 'DELETE',
     });
     const json = await response.json();
     setLoading(false);
     if (response.ok) {
-      dispatch({ type: 'DELETE_EMPLOIS', payload: json }); // Supprime l'emploi du contexte
+      dispatch({ type: 'DELETE_EMPLOIS', payload: json });
     } else {
-      setError('Échec de la suppression: ' + json.message); // Affiche l'erreur si la suppression échoue
+      setError('Échec de la suppression: ' + json.message);
     }
   };
 
-  // Affiche/masque les détails de l'emploi
->>>>>>> abc2b3881281e13a8ce3235e561df8337480de42
-  const toggleDetails = () => {
-    setShowDetails(prevState => !prevState);
-  };
+  // Fonction pour afficher/masquer les détails
+  const toggleDetails = () => setShowDetails(prev => !prev);
 
-<<<<<<< HEAD
-  return (
-    <div>
-      <ul className="lmj-emploi-list">
-        <div className={`emploi-container ${showDetails ? 'details-visible' : ''}`} onClick={toggleDetails}>
-          <h5 className="jobTitle">{emploi.nom_poste}</h5>
-          <span className="jobEntreprise">{emploi.nom_entreprise}</span>
-          <span className="jobSector">{emploi.categorie}</span>
-          <span className="jobSalary">{emploi.salaire}</span>
-          <span className="jobLocation">{emploi.emplacement}</span>
-          <span className="jobLocation">{emploi.email_employeur}</span>
-          <div>
-           <p className="jobDescription">Description du poste : {emploi.description}</p>
-           <p className="jobResponsabilite">Responsabilités : {emploi.responsabilite}</p>
-           <p className="jobExigence">Exigences : {emploi.exigence}</p>
-         </div>
+  // Fonction pour afficher/masquer l'email de l'employeur
+  const toggleEmail = () => setShowEmail(prev => !prev);
 
-          <p>{formatDistanceToNow(new Date(emploi.createdAt), { addSuffix: true })}</p>
-          <button className="deleteButton" onClick={handleClick}>Supprimer</button>
+  // Fonction pour activer/désactiver le mode édition
+  const toggleEdit = () => setIsEditing(prev => !prev);
 
-         
-=======
-  // Affiche/masque l'email de l'employeur
-  const toggleEmail = () => {
-    setShowEmail(prevState => !prevState);
-  };
-
-  // Active/désactive le mode édition
-  const toggleEdit = () => {
-    setIsEditing(prevState => !prevState);
-  };
-
-  // Met à jour les champs en cours d'édition
+  // Fonction pour gérer les changements dans le formulaire d'édition
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEditedEmploi(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
+    setEditedEmploi(prev => ({ ...prev, [name]: value }));
   };
 
-  // Envoie les modifications apportées
+  // Fonction pour soumettre les modifications
   const handleSubmitEdit = (e) => {
     e.preventDefault();
     console.log("Données mises à jour :", editedEmploi);
-    toggleEdit(); // Quitte le mode édition après soumission
+    toggleEdit();
   };
 
   return (
     <div className="emploi-detail-container">
       <ul className="lmj-emploi-list">
-        <div className={`emploi-container ${isEditing ? "editing" : ""}`}> 
-          {/* Icone d'édition cliquable pour passer en mode édition */}
+        <div className={`emploi-container ${isEditing ? "editing" : ""}`}>
           <div className="image-containerB" onClick={toggleEdit}>
             <img src={edit} alt="edit" className="small-image" />
           </div>
           
-          {/* Détails de l'emploi affichés */}
           <h3 className="jobTitle" onClick={toggleDetails} style={{ cursor: "pointer" }}>
             {emploi.nom_poste}
           </h3>
@@ -136,7 +79,6 @@ const EmploiDetail = ({ emploi }) => {
             Afficher l'email
           </button>
 
-          {/* Affiche l'email de l'employeur dans un popup si showEmail est activé */}
           {showEmail && (
             <div className="popup email-popup">
               <div className="popup-content">
@@ -146,7 +88,6 @@ const EmploiDetail = ({ emploi }) => {
             </div>
           )}
 
-          {/* Affiche les détails de l'emploi dans un popup si showDetails est activé */}
           {showDetails && (
             <div className="details-popup">
               <div className="details-popup-content">
@@ -163,22 +104,18 @@ const EmploiDetail = ({ emploi }) => {
             </div>
           )}
           
-          {/* Affiche un message d'erreur en cas de problème */}
           {error && <div className="error-message">{error}</div>}
 
-          {/* Bouton pour supprimer l'annonce, désactivé pendant le chargement */}
           <button onClick={handleClick} className="delete-button" disabled={loading}>
             {loading ? 'Suppression...' : 'Supprimer l\'annonce'}
           </button>
 
-          {/* Formulaire d'édition s'affiche si isEditing est activé */}
           {isEditing && (
             <div className="edit-popup">
               <div className="edit-popup-content">
                 <span className="close" onClick={toggleEdit}>&times;</span>
                 <h4>Modifier l'offre d'emploi</h4>
-                <form onSubmit={handleSubmitEdit} className="edit-job-form"> 
-                  {/* Chaque champ d'édition a un label et une entrée, avec des validations simples */}
+                <form onSubmit={handleSubmitEdit} className="edit-job-form">
                   <div className="inputs-groups">
                     <label>Nom de l'entreprise</label>
                     <input
@@ -189,7 +126,6 @@ const EmploiDetail = ({ emploi }) => {
                       required
                     />
                   </div>
-                  {/* Autres champs d'édition pour l'emploi */}
                   <div className="inputs-groups">
                     <label>Nom du poste</label>
                     <input
@@ -200,7 +136,6 @@ const EmploiDetail = ({ emploi }) => {
                       required
                     />
                   </div>
-                  {/* Validation de format pour le salaire */}
                   <div className="inputs-groups">
                     <label>Salaire</label>
                     <input
@@ -216,8 +151,6 @@ const EmploiDetail = ({ emploi }) => {
                       required
                     />
                   </div>
-
-                  {/* Sélection de l'emplacement parmi les options importées */}
                   <div className="inputs-groups">
                     <label>Emplacement</label>
                     <select
@@ -233,8 +166,6 @@ const EmploiDetail = ({ emploi }) => {
                       ))}
                     </select>
                   </div>
-                  
-                  {/* Catégories d'emploi disponibles */}
                   <div className="inputs-groups">
                     <label>Catégorie</label>
                     <select
@@ -255,8 +186,6 @@ const EmploiDetail = ({ emploi }) => {
                       <option value="Autre">Autre</option>
                     </select>
                   </div>
-                  
-                  {/* Champ pour l'email de l'employeur */}
                   <div className="inputs-groups">
                     <label>Email de l'employeur</label>
                     <input
@@ -267,8 +196,6 @@ const EmploiDetail = ({ emploi }) => {
                       required
                     />
                   </div>
-
-                  {/* Autres champs d'édition pour les exigences, la description et les responsabilités */}
                   <div className="inputs-groups">
                     <label>Description</label>
                     <textarea
@@ -296,8 +223,6 @@ const EmploiDetail = ({ emploi }) => {
                       required
                     />
                   </div>
-
-                  {/* Bouton pour soumettre le formulaire */}
                   <button type="submit" className="edit-button">
                     Sauvegarder les modifications
                   </button>
@@ -305,7 +230,6 @@ const EmploiDetail = ({ emploi }) => {
               </div>
             </div>
           )}
->>>>>>> abc2b3881281e13a8ce3235e561df8337480de42
         </div>
       </ul>
     </div>
