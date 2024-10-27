@@ -78,10 +78,10 @@
     margin-left: 85px;
 }
 
-.image-container {
+.image-containerB {
     position: absolute; /* Pour positionner l'image par rapport à son conteneur */
-    top: 20px; /* Ajustez cette valeur pour le positionnement vertical */
-    left: 180px; /* Ajustez cette valeur pour le positionnement horizontal */
+    top: 10px; /* Ajustez cette valeur pour le positionnement vertical */
+    left: 370px; /* Ajustez cette valeur pour le positionnement horizontal */
     z-index: 10; /* Pour s'assurer qu'elle soit au-dessus d'autres éléments */
   }
   

@@ -66,7 +66,7 @@ const EmploiDetail = ({ emploi }) => {
       <ul className="lmj-emploi-list">
         <div className={`emploi-container ${isEditing ? "editing" : ""}`}> 
           {/* Icone d'édition cliquable pour passer en mode édition */}
-          <div className="image-container" onClick={toggleEdit}>
+          <div className="image-containerB" onClick={toggleEdit}>
             <img src={edit} alt="edit" className="small-image" />
           </div>
           
