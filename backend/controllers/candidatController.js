@@ -11,8 +11,10 @@ const createToken = (_id)=>{
 
 
 
+
 //connexion
 const loginCandidat = async (req,res) =>{
+
 
     const {
         email_candidat,
@@ -34,6 +36,9 @@ const loginCandidat = async (req,res) =>{
     }
 
 
+
+    res.json({mssg:'login candidat chakal'})
+
 }
 
 //inscription
@@ -49,19 +54,22 @@ const signupCandidat = async (req,res) =>{
             email_candidat,
             mot_de_passeCandidat)
 
+//??
 
             const token = createToken(candidat._id)
 
 
         res.status(200).json({email_candidat,token})
+        res.status(200).json({email_candidat,candidat})
+
     }
     catch(error){
             res.status(400).json({error:error.message})
     }
 
-
-  
 }
+  
+
 
 export{
     loginCandidat,

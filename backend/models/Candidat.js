@@ -58,6 +58,7 @@ if(!validator.isStrongPassword(mot_de_passeCandidat)){
 
   return candidat;
 
+
 };
 
 
@@ -87,6 +88,10 @@ if(!validator.isStrongPassword(mot_de_passeCandidat)){
         return candidat
 }
 
+
+
+
+;
 
 
 

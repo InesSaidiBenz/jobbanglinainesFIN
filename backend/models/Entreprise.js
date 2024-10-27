@@ -74,6 +74,7 @@ const entrepriseSchema = new Schema({
 
         return entreprise
 
+
  }
 
  //static login methodes
@@ -102,6 +103,9 @@ entrepriseSchema.statics.loginEntreprise = async function (
           return entreprise
 }
 
+
+
+ 
 
 const Entreprise = mongoose.model('Entreprise', entrepriseSchema);
 export default Entreprise;

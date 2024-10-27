@@ -1,4 +1,5 @@
 import Entreprise from '../models/Entreprise.js';
+
 import jwt from 'jsonwebtoken'
 
 const createToken = (_id)=>{
@@ -7,9 +8,14 @@ const createToken = (_id)=>{
 
 }
 
+
+
+
+
 //connexion
 const loginEntreprise = async (req,res) =>{
    
+
     const { 
         email_entreprise,
         mot_de_passeEntreprise} = req.body
@@ -36,6 +42,12 @@ const loginEntreprise = async (req,res) =>{
 
 
    
+
+
+
+
+    res.json({mssg:'login entreprise chakal'})
+
 }
 
 //inscription
@@ -59,11 +71,15 @@ const inscriptionEntreprise = async (req,res) =>{
                 mot_de_passeEntreprise)
 
 
+
                 //create token
 
                 const token = createToken(entreprise._id)
 
             res.status(200).json({email_entreprise, token}) 
+
+            res.status(200).json({email_entreprise, entreprise}) 
+
         }
         catch(error){
             res.status(400).json({error:error.message})
