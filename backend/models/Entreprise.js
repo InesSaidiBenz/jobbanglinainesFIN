@@ -73,7 +73,35 @@ const entrepriseSchema = new Schema({
         mot_de_passeEntreprise: hash})
 
         return entreprise
+
  }
+
+ //static login methodes
+entrepriseSchema.statics.loginEntreprise = async function (
+    email_entreprise,
+    mot_de_passeEntreprise) {
+    
+
+        if(!email_entreprise || !mot_de_passeEntreprise){ 
+            throw Error('tous les champs doivent être remplis')
+        }
+
+
+        const entreprise = await this.findOne({email_entreprise})
+
+        if(!entreprise){
+            throw Error('Email entreprise incorrect');
+          }
+
+          const match = await bcrypt.compare(mot_de_passeEntreprise, entreprise.mot_de_passeEntreprise)
+
+          if(!match){
+            throw Error('mot de passe entreprise invalide')
+          }
+
+          return entreprise
+}
+
 
 const Entreprise = mongoose.model('Entreprise', entrepriseSchema);
 export default Entreprise;

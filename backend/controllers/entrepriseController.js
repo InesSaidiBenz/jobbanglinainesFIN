@@ -1,14 +1,41 @@
 import Entreprise from '../models/Entreprise.js';
+import jwt from 'jsonwebtoken'
 
+const createToken = (_id)=>{
 
+   return jwt.sign({_id}, process.env.SECRET, {expiresIn: '4d' })
+
+}
 
 //connexion
 const loginEntreprise = async (req,res) =>{
    
+    const { 
+        email_entreprise,
+        mot_de_passeEntreprise} = req.body
 
 
 
-    res.json({mssg:'login entreprise chakal'})
+        try{
+            const entreprise = await Entreprise.loginEntreprise(
+                email_entreprise,
+                mot_de_passeEntreprise)
+
+
+                //create token
+
+                const token = createToken(entreprise._id)
+
+            res.status(200).json({email_entreprise, token}) 
+        }
+        catch(error){
+            res.status(400).json({error:error.message})
+
+        }
+
+
+
+   
 }
 
 //inscription
@@ -31,7 +58,12 @@ const inscriptionEntreprise = async (req,res) =>{
                 adresse,
                 mot_de_passeEntreprise)
 
-            res.status(200).json({email_entreprise, entreprise}) 
+
+                //create token
+
+                const token = createToken(entreprise._id)
+
+            res.status(200).json({email_entreprise, token}) 
         }
         catch(error){
             res.status(400).json({error:error.message})

@@ -57,7 +57,37 @@ if(!validator.isStrongPassword(mot_de_passeCandidat)){
   });
 
   return candidat;
+
 };
+
+
+ //static login methodes
+
+ candidatSchema.statics.loginCandidat = async function (
+  email_candidat,
+  mot_de_passeCandidat) {
+  
+
+      if(!email_candidat || !mot_de_passeCandidat){ 
+          throw Error('tous les champs doivent être remplis')
+      }
+
+
+      const candidat = await this.findOne({email_candidat})
+
+      if(!candidat){
+          throw Error('Email candidat incorrect');
+        }
+
+        const match = await bcrypt.compare(mot_de_passeCandidat, candidat.mot_de_passeCandidat);
+        if(!match){
+          throw Error('mot de passe candidat invalide')
+        }
+
+        return candidat
+}
+
+
 
 
  
