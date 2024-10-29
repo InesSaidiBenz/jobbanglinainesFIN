@@ -68,11 +68,15 @@ nav {
   .navbar-links-container a:hover {
     text-decoration: underline;
   }
-  .heart2-icon {
-    margin-left:1250px; /* Pousse l'icône à droite */
-    padding: 10px; /* Ajustez le padding selon vos besoins */
+ /* Conteneur pour le cœur */
+.heart2-iconn {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  margin-left: 1550px; /* Ajuste l'espace entre le cœur et le bouton de déconnexion */
+}
+  .logout-button{
+    margin-left:10px;
     display: flex; /* Pour un affichage correct */
-    
-    
+    animation: none;
   }
-  

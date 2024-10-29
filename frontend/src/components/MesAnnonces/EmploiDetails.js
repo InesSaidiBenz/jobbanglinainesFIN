@@ -53,6 +53,7 @@ const EmploiDetail = ({ emploi }) => {
   };
 
   return (
+    
     <div className="emploi-detail-container">
       <ul className="lmj-emploi-list">
         <div className={`emploi-container ${isEditing ? "editing" : ""}`}>

@@ -68,4 +68,7 @@ nav {
   .navbar-links-container a:hover {
     text-decoration: underline;
   }
-  
+  .logoutEnt2-button{
+    margin-left: 1690px;
+    animation: none;
+  }
