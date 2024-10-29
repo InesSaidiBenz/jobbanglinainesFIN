@@ -10,7 +10,7 @@ switch(action.type) {
     case 'LOGINCANDIDAT':
         return {candidat : action.payload}
 
-    case 'LOGOUCANDIDAT':
+    case 'LOGOUTCANDIDAT':
         return {candidat: null}
 
     default:
