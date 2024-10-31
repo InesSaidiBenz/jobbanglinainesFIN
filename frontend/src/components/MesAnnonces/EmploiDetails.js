@@ -13,6 +13,7 @@ const EmploiDetail = ({ emploi }) => {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editedEmploi, setEditedEmploi] = useState({ ...emploi });
+  const [isVisible, setIsVisible] = useState(emploi.isVisible || false); // État pour le switch
 
   // Fonction pour supprimer l'emploi
   const handleClick = async () => {
@@ -45,15 +46,32 @@ const EmploiDetail = ({ emploi }) => {
     setEditedEmploi(prev => ({ ...prev, [name]: value }));
   };
 
+  // Fonction pour gérer le changement du switch de visibilité
+  const handleVisibilityChange = () => {
+    setIsVisible(prev => !prev);
+    setEditedEmploi(prev => ({ ...prev, isVisible: !prev.isVisible })); // Met à jour l'état de visibilité dans l'objet d'emploi
+  };
+
   // Fonction pour soumettre les modifications
-  const handleSubmitEdit = (e) => {
+  const handleSubmitEdit = async (e) => {
     e.preventDefault();
-    console.log("Données mises à jour :", editedEmploi);
-    toggleEdit();
+    const response = await fetch('/api/offreEmploi/' + emploi._id, {
+      method: 'PATCH',
+      body: JSON.stringify(editedEmploi),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const json = await response.json();
+    if (response.ok) {
+      dispatch({ type: 'UPDATE_EMPLOIS', payload: json });
+      toggleEdit();
+    } else {
+      setError('Échec de la mise à jour: ' + json.message);
+    }
   };
 
   return (
-    
     <div className="emploi-detail-container">
       <ul className="lmj-emploi-list">
         <div className={`emploi-container ${isEditing ? "editing" : ""}`}>
@@ -224,9 +242,14 @@ const EmploiDetail = ({ emploi }) => {
                       required
                     />
                   </div>
-                  <button type="submit" className="edit-button">
-                    Sauvegarder les modifications
-                  </button>
+                  <div className="inputs-groups">
+                    <label>Afficher aux candidats</label>
+                    <label className="switch">
+                      <input type="checkbox" checked={isVisible} onChange={handleVisibilityChange} />
+                      <span className="slider"></span>
+                    </label>
+                  </div>
+                  <button type="submit" className="submit-button">Sauvegarder</button>
                 </form>
               </div>
             </div>

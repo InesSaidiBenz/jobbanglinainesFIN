@@ -90,7 +90,7 @@
     height: auto; /* Conserver le ratio d'aspect */
   }
   .emploi-container.editing {
-    margin-bottom: 750px; /* Espace pour afficher le formulaire sous l'offre d'emploi */
+    margin-bottom: 800px; /* Espace pour afficher le formulaire sous l'offre d'emploi */
 }
 
 .edit-popup {
@@ -127,4 +127,51 @@
 .inputs-groups textarea {
     margin-bottom: 10px; /* Espace sous chaque champ de saisie */
     width:80%; /* Pour s'assurer qu'ils occupent toute la largeur */
+}
+
+.switch {
+  margin-left: 10px;
+  
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
 }
