@@ -58,9 +58,9 @@ const signupCandidat = async (req,res) =>{
 
             const token = createToken(candidat._id)
 
-
-        res.status(200).json({email_candidat,token})
-        res.status(200).json({email_candidat,candidat})
+            res.status(200).json({ email_candidat, token, candidat });
+     //   res.status(200).json({email_candidat,token})
+    //    res.status(200).json({email_candidat,candidat})
 
     }
     catch(error){

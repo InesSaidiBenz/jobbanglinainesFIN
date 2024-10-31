@@ -76,9 +76,9 @@ const inscriptionEntreprise = async (req,res) =>{
 
                 const token = createToken(entreprise._id)
 
-            res.status(200).json({email_entreprise, token}) 
-
-            res.status(200).json({email_entreprise, entreprise}) 
+           // res.status(200).json({email_entreprise, token}) 
+            res.status(200).json({ email_entreprise, token, entreprise });
+          //  res.status(200).json({email_entreprise, entreprise}) 
 
         }
         catch(error){

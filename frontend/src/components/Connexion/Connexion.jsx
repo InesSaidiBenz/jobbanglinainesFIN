@@ -4,24 +4,24 @@ import "./Connexion.css";
 import NavBar from '../NavBar/NavBar';
 //import { CandidatsList } from '../../data/candidats'; // Importer la liste des candidats
 import { useCandidatContext } from "../../hooks/useCandidatContext";
-
+import { useConnexionCandidat } from "../../hooks/useConnexionCandidat";
 // Pour naviguer après la soumission
 
 
 
 
 const Connexion = () => {
-  const {dispatch} = useCandidatContext()
+  //const {dispatch} = useCandidatContext()
   const [emailCandidat, setEmailCandidat] = useState('')
   const [mot_de_passeCandidat, setMDPcandidat] = useState('')
+  const {connexionCad, error, isLoading} = useConnexionCandidat()
 
-
-  const[error, setError] = useState(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log( emailCandidat, mot_de_passeCandidat)
+    connexionCad( emailCandidat, mot_de_passeCandidat)
 
+    /*
 const candidat = {
   email_candidat:emailCandidat,
   mot_de_passeCandidat:mot_de_passeCandidat
@@ -50,7 +50,7 @@ if(response.ok){
 }
 
 
-
+*/
 
 
 }
@@ -88,11 +88,14 @@ return (
           <p>Pas de compte avec nous ?</p>
           <br />
           <a href="./ins">
-            <button className="signup-btn">Créer un compte</button>
+            <button disabled={isLoading} className="signup-btn">Créer un compte</button>
+            {error && <div>{error}</div>}
+
           </a> 
         </div>
         
       {error && <p className="error">{error}</p>}
+      
     </div>
   </div>
 );
