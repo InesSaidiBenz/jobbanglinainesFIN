@@ -6,10 +6,10 @@ import { useNavigate, useLocation } from 'react-router-dom'; // Ajout de useLoca
 export const Entreprise = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const connectedEmployerEmail = location.state?.connectedEmployerEmail;  // Récupère l'email ici
+ 
 
   const handleMesAnnoncesClick = () => {
-    navigate('/annp', { state: { connectedEmployerEmail } });  // Passe l'email ici aussi
+    navigate('/annp');  // Passe l'email ici aussi
   };
 
 
@@ -21,18 +21,16 @@ export const Entreprise = () => {
           <ul>
             <li>Tableau de bord</li>
             <li>
-              <button onClick={() => navigate('/off')} className="sidebar-link">
-                Créer un poste
+              <button onClick={handleMesAnnoncesClick} className="sidebar-link"> 
+                Création
               </button>
-            </li>
-            <li onClick={handleMesAnnoncesClick} className="sidebar-link">
-              Mes annonces
+             
+            
             </li>
           </ul>
         </aside>
         <div className="main-content2">
           <h1>Bienvenue dans l'espace entreprise !</h1>
-          <p>Employeur connecté : {connectedEmployerEmail || "Aucun employeur connecté"}</p> {/* Affiche l'email ou un message par défaut */}
         </div>
       </div>
     </div>

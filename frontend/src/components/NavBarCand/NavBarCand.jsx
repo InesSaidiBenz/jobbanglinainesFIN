@@ -1,21 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NavBarCand.css";
 import Logo from "../../images/logo.jpg";
 import { FaHeart } from "react-icons/fa";
 import { useCandidatLougout } from "../../hooks/useCandidatLogout";
 import { useCandidatContext } from "../../hooks/useCandidatContext";
-// Importez le hook useLogout
+
 const NavBarCand = () => {
-  const {candidat} = useCandidatContext()
+  const { candidat } = useCandidatContext();
   const { lougoutcandidat } = useCandidatLougout();
+  const navigate = useNavigate();
+
   const handleClick = () => {
     lougoutcandidat();
+    navigate("/"); // Redirige vers l'accueil après la déconnexion
   };
 
-
-
-  const menuOptions = [{ text: "Accueil", path: "/" }];
   return (
     <nav>
       <div className="nav-container">
@@ -28,15 +28,15 @@ const NavBarCand = () => {
             <FaHeart color="white" size={25} />
           </Link>
 
-    {candidat &&(
-      <div>
-          <span>{candidat.email_candidat} </span>
-          <button onClick={handleClick} className="logout-button">
-            Log out
-          </button>{" "}
-          {/* Bouton Log out */}
-          </div>
-        )}
+    
+          {candidat && (
+            <div className="candidat-info"> 
+              <span className="candidat-email">{candidat.email_candidat}</span>
+              <button onClick={handleClick} className="logout-button">
+                Log out
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </nav>
