@@ -4,12 +4,13 @@ import NavBar from '../NavBar/NavBar';
 import { useNavigate } from 'react-router-dom'; // Pour naviguer après la connexion
 //import { EmployersList } from '../../data/employers'; //// Assurez-vous que le chemin est correct
 import { useConnexionEntreprise } from "../../hooks/useConnexionEntreprise";
- // Pour naviguer après la soumission
-import { useEntrepriseContext } from "../../hooks/useEntrepriseContext";
+
+//import { useEntrepriseContext } from "../../hooks/useEntrepriseContext";
 
 
 const ConnexionEnt = () => {
  // const {dispatch} = useEntrepriseContext()
+  const navigate = useNavigate();
   const [emailEntreprise, setEmailEntreprise]= useState('')
   const [mot_de_passeEntreprise,setMDPentreprise]= useState('')
   const {connexionEnt, error, isLoading} = useConnexionEntreprise()
@@ -17,8 +18,17 @@ const ConnexionEnt = () => {
  
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    await connexionEnt( emailEntreprise, mot_de_passeEntreprise)
+    e.preventDefault();
+    const success = await connexionEnt(emailEntreprise, mot_de_passeEntreprise);    
+
+    console.log('Success:', success); // Vérifiez si 'success' est bien vrai
+
+    if (success) {
+      navigate('/ent'); // Redirige l'utilisateur??? jsp si cest la bonne route
+    } else {
+      console.log('Erreur de connexion');
+    
+    }
 
 /*
 const entreprise = {
@@ -100,69 +110,6 @@ if(response.ok){
 }
 
 export default ConnexionEnt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

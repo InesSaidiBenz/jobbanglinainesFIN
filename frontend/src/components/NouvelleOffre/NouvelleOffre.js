@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import NavBarEnt from "../NavBarEnt/NavBarEnt";
 import './NouvelleOffre.css'
 import { useEmploiContext } from "../../hooks/useEmploiContext";
+import { useEntrepriseContext } from "../../hooks/useEntrepriseContext";
 
 const NouvelleOffre = () =>{
+  const {entreprise}  = useEntrepriseContext()
     const {dispatch} = useEmploiContext()
     const[nomEntreprise, setNomEntreprise] = useState('')
     const[nomPoste, setNomPoste] = useState('')
@@ -23,6 +25,11 @@ const NouvelleOffre = () =>{
 const handleSubmit = async (e) => {
     e.preventDefault()
 
+    if(!entreprise){
+      setError('Tu dois etre connecter')
+      return
+    }
+
     const offreEmploi = { 
         nom_entreprise: nomEntreprise,
         nom_poste: nomPoste,
@@ -39,7 +46,9 @@ const handleSubmit = async (e) => {
             method:'POST',
             body: JSON.stringify(offreEmploi),
             headers:{
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${entreprise.token}`
+
             }
         })
         const json = await response.json()

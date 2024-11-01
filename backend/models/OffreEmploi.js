@@ -38,6 +38,10 @@ const offreSchema = new Schema({
       exigence: {
         type: String,
         required: true
+      },
+      entreprise_id:{
+        type: String,
+        required: true
       }
     }, { timestamps: true });
 

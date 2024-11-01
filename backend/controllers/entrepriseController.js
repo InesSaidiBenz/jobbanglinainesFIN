@@ -28,6 +28,9 @@ const loginEntreprise = async (req,res) =>{
                 mot_de_passeEntreprise)
 
 
+                if (!entreprise) {
+                    return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
+                }
                 //create token
 
                 const token = createToken(entreprise._id)
@@ -39,14 +42,6 @@ const loginEntreprise = async (req,res) =>{
 
         }
 
-
-
-   
-
-
-
-
-    res.json({mssg:'login entreprise chakal'})
 
 }
 

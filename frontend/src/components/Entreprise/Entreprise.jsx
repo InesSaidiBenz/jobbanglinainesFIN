@@ -12,6 +12,35 @@ export const Entreprise = () => {
     navigate('/annp', { state: { connectedEmployerEmail } });  // Passe l'email ici aussi
   };
 
+
+  return (
+    <div className="entreprise-container">
+      <NavBarEnt2 />
+      <div className="content">
+        <aside className="sidebar">
+          <ul>
+            <li>Tableau de bord</li>
+            <li>
+              <button onClick={() => navigate('/off')} className="sidebar-link">
+                Créer un poste
+              </button>
+            </li>
+            <li onClick={handleMesAnnoncesClick} className="sidebar-link">
+              Mes annonces
+            </li>
+          </ul>
+        </aside>
+        <div className="main-content2">
+          <h1>Bienvenue dans l'espace entreprise !</h1>
+          <p>Employeur connecté : {connectedEmployerEmail || "Aucun employeur connecté"}</p> {/* Affiche l'email ou un message par défaut */}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+/*
   return (
     <div className="entreprise-container">
       <NavBarEnt2 />
@@ -29,11 +58,11 @@ export const Entreprise = () => {
         </aside>
         <div className="main-content2">
           <h1>Bienvenue dans l'espace entreprise !</h1>
-          <p>Employeur connecté : {connectedEmployerEmail}</p>  {/* Affichage de l'email */}
+          <p>Employeur connecté : {connectedEmployerEmail}</p>  {/* Affichage de l'email *//*}*//*
         </div>
       </div>
     </div>
   );
 };
-
+*/
 export default Entreprise;

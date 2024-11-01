@@ -1,9 +1,12 @@
 import { useEntrepriseContext } from "./useEntrepriseContext"
+import { useEmploiContext } from "./useEmploiContext"
 
 
 export const useEntrepriseLougout = () => {
 
     const {dispatch} = useEntrepriseContext()
+    const {dispatch: emploiDispatch} = useEmploiContext()
+
     const lougoutentreprise = () => {
 
         //remove user from storage
@@ -11,6 +14,7 @@ export const useEntrepriseLougout = () => {
 
         //dispatch lougout action
         dispatch({type:'LOGOUTENTREPRISE'})
+        emploiDispatch({type: 'SET_EMPLOIS', payload: null})
 
 }
 

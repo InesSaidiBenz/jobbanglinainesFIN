@@ -3,10 +3,11 @@ import EmploiDetails from "./EmploiDetails"
 import "./MesAnnonces.css";
 import NouvelleOffre from "../NouvelleOffre/NouvelleOffre";
 import { useEmploiContext } from "../../hooks/useEmploiContext";
-
+import { useEntrepriseContext } from "../../hooks/useEntrepriseContext";
 
 const MesAnnonces = ({ connectedEmployerEmail }) => {
    const {emplois, dispatch}= useEmploiContext()
+   const {entreprise} = useEntrepriseContext()
    const filteredEmploiList = emplois ? emplois.filter(
     (emploi) => emploi.email_employeur === connectedEmployerEmail
   ) : [];
@@ -20,7 +21,11 @@ const MesAnnonces = ({ connectedEmployerEmail }) => {
 //fetch tout les emploi et supprimer et modifier potentiellement
 useEffect(()=>{
 const fetchEmploi = async()=>{
-  const response = await fetch('/api/offreEmploi')
+  const response = await fetch('/api/offreEmploi', {
+    headers: {
+      'Authorization': `Bearer ${entreprise.token}`
+    }
+  })
   const json = await response.json()
 
   if(response.ok){
@@ -29,9 +34,13 @@ const fetchEmploi = async()=>{
   }
 }
 
-fetchEmploi()
+if(entreprise){
+  fetchEmploi()
+}
 
-},[dispatch])
+
+
+},[dispatch, entreprise])
 
 
 return (
