@@ -8,7 +8,7 @@ const createToken = (_id)=>{
     return  jwt.sign({_id}, process.env.SECRET, {expiresIn: '4d' })
 
 }
-
+//git fin ines
 
 
 
