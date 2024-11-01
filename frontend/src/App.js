@@ -29,8 +29,8 @@ function App() {
 <Route path="/ins" element={<Inscription />} />
 <Route path="/ent" element={<Entreprise />} />
 <Route path="/inscent" element={<InscriptionEnt />} />
-{/* Selon si lentreprise n'est pas connecter, le navigate vers.... jai mis / car je ne sais pas, cest un exemple, regarder video16 au pire  */}
-<Route path="/conent" element={entreprise ? <ConnexionEnt /> :<Navigate to="/" />} />
+{/* Selon si lentreprise n'est pas connecter, le navigate vers.... jai mis / car je ne sais pas, cest un exemple, regarder video16 au pire  :<Navigate to="/" entreprise ? */}
+<Route path="/conent" element={ <ConnexionEnt /> } />
 <Route 
         path="/cand" 
         element={<Candidat likedJobs={likedJobs} setLikedJobs={setLikedJobs} />} 

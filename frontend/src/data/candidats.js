@@ -10,7 +10,7 @@ export const CandidatsList = [
   {
     nom: "Alice Dupont",
     email: "alice.dupont@gmail.com",
-    mot_de_passe: "Pass1234"
+    mot_de_passe: "Pass1234!"
   },
   {
     nom: "Benoît Martin",

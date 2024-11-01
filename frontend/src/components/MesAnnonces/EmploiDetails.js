@@ -69,6 +69,7 @@ const EmploiDetail = ({ emploi }) => {
       body: JSON.stringify(editedEmploi),
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${entreprise.token}`
       },
     });
     const json = await response.json();
