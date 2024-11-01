@@ -1,15 +1,16 @@
 export const CandidatsList = [
  
   {
+    // utiliser ca pour ce connecter en tant que candidat
       nom: "Lina Saad",
       email: "lina.saad@gmail.com",
-      mot_de_passe: "Hello123"
+      mot_de_passe: "HelloLina123!"
     },
 
   {
     nom: "Alice Dupont",
     email: "alice.dupont@gmail.com",
-    mot_de_passe: "Pass1234"
+    mot_de_passe: "Pass1234!"
   },
   {
     nom: "Benoît Martin",

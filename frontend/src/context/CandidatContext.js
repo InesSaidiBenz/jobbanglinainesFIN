@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer , useEffect} from "react";
 
 
 
@@ -24,6 +24,16 @@ export const CandidatContextProvider =({children}) => {
 const [state,dispatch] = useReducer(candidatReducer, {
     candidat:null
 })
+
+
+useEffect(()=> {
+
+    const candidat = JSON.parse(localStorage.getItem('candidat'))
+    if(candidat){
+        dispatch({type:'LOGINCANDIDAT', payload: candidat})
+    }
+
+}, [])
 
 console.log('CandidatContext: ', state)
 

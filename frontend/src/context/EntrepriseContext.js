@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer , useEffect} from "react";
 
 
 export const EntrepriseContext = createContext()
@@ -24,7 +24,14 @@ const [state,dispatch] = useReducer(entrepriseReducer, {
     entreprise:null
 })
 
+useEffect(()=> {
+const entreprise = JSON.parse(localStorage.getItem('entreprise'))
 
+
+if(entreprise){
+dispatch({type: 'LOGINENTREPRISE', payload:entreprise })
+}
+}, [])
 
 console.log('EntrepriseContext: ', state)
 

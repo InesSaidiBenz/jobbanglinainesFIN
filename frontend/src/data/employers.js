@@ -1,8 +1,10 @@
 export const EmployersList = [
   { 
+        // utiliser ca pour ce connecter en tant que entreprise
+
       nom_entreprise: "Innovateurs Tech",
       email: "rh@innovateurstech.com",
-      password: "Innovateur123" },
+      password: "Innovateur123!" },
   { 
       nom_entreprise: "Solutions Créatives",
       email: "recrutement@solutionscreatives.ca",

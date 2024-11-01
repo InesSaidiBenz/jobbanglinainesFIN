@@ -3,29 +3,41 @@ import "./ConnexionEnt.css";
 import NavBar from '../NavBar/NavBar';
 import { useNavigate } from 'react-router-dom'; // Pour naviguer après la connexion
 //import { EmployersList } from '../../data/employers'; //// Assurez-vous que le chemin est correct
+import { useConnexionEntreprise } from "../../hooks/useConnexionEntreprise";
 
- // Pour naviguer après la soumission
-import { useEntrepriseContext } from "../../hooks/useEntrepriseContext";
+//import { useEntrepriseContext } from "../../hooks/useEntrepriseContext";
 
 
 const ConnexionEnt = () => {
-  const {dispatch} = useEntrepriseContext()
+ // const {dispatch} = useEntrepriseContext()
+  const navigate = useNavigate();
   const [emailEntreprise, setEmailEntreprise]= useState('')
   const [mot_de_passeEntreprise,setMDPentreprise]= useState('')
+  const {connexionEnt, error, isLoading} = useConnexionEntreprise()
 
-  const[error, setError] = useState(null)
+ 
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    console.log( emailEntreprise, mot_de_passeEntreprise)
+    e.preventDefault();
+    const success = await connexionEnt(emailEntreprise, mot_de_passeEntreprise);    
 
+    console.log('Success:', success); // Vérifiez si 'success' est bien vrai
 
+    if (success) {
+      navigate('/ent'); // Redirige l'utilisateur??? jsp si cest la bonne route
+    } else {
+      console.log('Erreur de connexion');
+    
+    }
+
+/*
 const entreprise = {
   emailEntreprise:emailEntreprise,
   mot_de_passeEntreprise:mot_de_passeEntreprise
 
 }
-
+*/
+/*
 const response = await fetch('/api/entreprise/', {
   method:'POST',
   body: JSON.stringify(entreprise),
@@ -37,6 +49,7 @@ const json = await response.json()
 
 if(!response.ok){
       setError(json.error)
+      
 }
 if(response.ok){
   setEmailEntreprise('')
@@ -45,7 +58,7 @@ if(response.ok){
   console.log('compte entreprise connecter mon amour')
   dispatch({type: 'LOGINENTREPRISE', payload:json})
 }
-
+*/
 }
 
 
@@ -85,9 +98,11 @@ if(response.ok){
           <p>Pas de compte avec nous ?</p>
           <br />
           <a href="./inscent">
-            <button className="signup-btn">Créer un compte</button>
+            <button disabled={isLoading} className="signup-btn">Créer un compte</button>
+            {error && <div>{error}</div>}
           </a>
         </div>
+
       </div>
     </div>
 
@@ -95,69 +110,6 @@ if(response.ok){
 }
 
 export default ConnexionEnt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -238,4 +190,4 @@ function ConnexionEnt() {
 }
 
 export default ConnexionEnt;
-*/
+***/

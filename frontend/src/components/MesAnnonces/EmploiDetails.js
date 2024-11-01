@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useEmploiContext } from "../../hooks/useEmploiContext";
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import "./EmploiDetails.css";
 import edit from '../../images/edit.png';
 import { locations } from '../../data/locations';
+import { useEntrepriseContext } from "../../hooks/useEntrepriseContext";
 
 const EmploiDetail = ({ emploi }) => {
+  const {entreprise} = useEntrepriseContext()
   const { dispatch } = useEmploiContext();
   const [showDetails, setShowDetails] = useState(false);
   const [showEmail, setShowEmail] = useState(false);
@@ -19,8 +20,16 @@ const EmploiDetail = ({ emploi }) => {
   const handleClick = async () => {
     setLoading(true);
     setError(null);
+    if(!entreprise){
+      return
+    }
+
     const response = await fetch('/api/offreEmploi/' + emploi._id, {
       method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${entreprise.token}`
+
+      }
     });
     const json = await response.json();
     setLoading(false);
@@ -60,6 +69,7 @@ const EmploiDetail = ({ emploi }) => {
       body: JSON.stringify(editedEmploi),
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${entreprise.token}`
       },
     });
     const json = await response.json();
