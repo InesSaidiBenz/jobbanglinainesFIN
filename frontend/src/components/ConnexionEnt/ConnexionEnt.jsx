@@ -17,50 +17,16 @@ const ConnexionEnt = () => {
 
  
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const success = await connexionEnt(emailEntreprise, mot_de_passeEntreprise);    
 
-    console.log('Success:', success); // Vérifiez si 'success' est bien vrai
-
-    if (success) {
-      navigate('/ent'); // Redirige l'utilisateur??? jsp si cest la bonne route
-    } else {
-      console.log('Erreur de connexion');
-    
-    }
-
-/*
-const entreprise = {
-  emailEntreprise:emailEntreprise,
-  mot_de_passeEntreprise:mot_de_passeEntreprise
-
-}
-*/
-/*
-const response = await fetch('/api/entreprise/', {
-  method:'POST',
-  body: JSON.stringify(entreprise),
-  headers:{
-      'Content-Type': 'application/json'
-  }
-})
-const json = await response.json()
-
-if(!response.ok){
-      setError(json.error)
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      await connexionEnt(emailEntreprise, mot_de_passeEntreprise);
       
-}
-if(response.ok){
-  setEmailEntreprise('')
-  setMDPentreprise('')
-  setError(null)
-  console.log('compte entreprise connecter mon amour')
-  dispatch({type: 'LOGINENTREPRISE', payload:json})
-}
-*/
-}
-
+      // Si la connexion est réussie, rediriger vers la page Candidat
+      if (!error) {
+        navigate('/ent');
+      }
+    };
 
   return (
 
@@ -70,8 +36,6 @@ if(response.ok){
         <h2>Connexion</h2>
         <p>Employeur</p>
         <form onSubmit={handleSubmit}>
-
-         
           <div className="input-group">
             <label>Email</label>
             <input
@@ -91,15 +55,17 @@ if(response.ok){
               required
             />
           </div>
-          <button type="submit" className="submit-btn">Se connecter</button>
+          <button type="submit" className="submit-btn" disabled={isLoading}>
+            Se connecter
+          </button>
+          {error && <p className="error">{error}</p>}
         </form>
 
         <div className="signup">
           <p>Pas de compte avec nous ?</p>
           <br />
           <a href="./inscent">
-            <button disabled={isLoading} className="signup-btn">Créer un compte</button>
-            {error && <div>{error}</div>}
+            <button className="signup-btn">Créer un compte</button>
           </a>
         </div>
 

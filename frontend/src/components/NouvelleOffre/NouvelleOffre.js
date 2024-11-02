@@ -30,6 +30,7 @@ const handleSubmit = async (e) => {
       return
     }
 
+    
     const offreEmploi = { 
         nom_entreprise: nomEntreprise,
         nom_poste: nomPoste,

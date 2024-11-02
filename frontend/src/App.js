@@ -6,8 +6,7 @@ import Inscription from './components/Inscription/Inscription';
 import { Entreprise } from "./components/Entreprise/Entreprise";
 import ConnexionEnt from './components/ConnexionEnt/ConnexionEnt'; 
 import InscriptionEnt from './components/InscriptionEnt/InscriptionEnt'; 
-import Candidat from './components/Candidat/Candidat'; 
-import OffreEmploi from './components/OffreEmploi/OffreEmploi'; 
+import Candidat from './components/Candidat/Candidat';  
 import EmploiItem from './components/EmploiItem/EmploiItem'; 
 import MesAnnonces from './components/MesAnnonces/MesAnnonces'; 
 import MesAnnoncesPage from './components/MesAnnoncesPage/MesAnnoncesPage'; 
@@ -15,6 +14,7 @@ import PostesLiker from './components/PostesLiker/PostesLiker';
 import { useEntrepriseContext } from './hooks/useEntrepriseContext';
 import { useCandidatContext } from './hooks/useCandidatContext';
 import './App.css';
+
  
 function App() {
   const {entreprise} = useEntrepriseContext()
@@ -34,10 +34,6 @@ function App() {
 <Route 
         path="/cand" 
         element={<Candidat likedJobs={likedJobs} setLikedJobs={setLikedJobs} />} 
-      />
-<Route 
-        path="/off" 
-        element={<OffreEmploi />} 
       />
 <Route 
         path="/emp" 

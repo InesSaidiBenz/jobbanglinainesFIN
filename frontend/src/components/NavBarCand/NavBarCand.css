@@ -76,7 +76,29 @@ nav {
   margin-left: 1550px; /* Ajuste l'espace entre le cœur et le bouton de déconnexion */
 }
   .logout-button{
-    margin-left:10px;
-    display: flex; /* Pour un affichage correct */
-    animation: none;
+  width: 100px; 
+  height: 40px; 
+  margin-left:80px; 
+  animation: none;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background-color: #d6415d;
+  color: white; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  box-sizing: border-box; 
   }
+
+  .candidat-info {
+    display: flex;
+    align-items: center;
+    margin-left:-450px; /* Ajoute un espace entre l'info et le bord droit */
+    color: white; /* Assurez-vous que le texte est visible */
+  }
+  
+  .candidat-email {
+    margin-left:220px; /* Espace entre l'email et le bouton de déconnexion */
+  }
+  

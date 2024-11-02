@@ -1,21 +1,19 @@
 import React from 'react';
-import './NavBarEnt.css'; 
+import './NavBarEnt.css';
+import { Link, useNavigate } from "react-router-dom"; 
 import Logo from '../../images/logo.jpg';
 import { useEntrepriseLougout } from "../../hooks/useEntrepriseLogout"; // Importez le hook useLogout
 import { useEntrepriseContext } from '../../hooks/useEntrepriseContext';
   
 const NavBarEnt = () => {
-  const {entreprise}= useEntrepriseContext()
-  const { lougoutentreprise } =  useEntrepriseLougout();
+  const navigate = useNavigate();
+  const { entreprise } = useEntrepriseContext();
+  const { lougoutentreprise } = useEntrepriseLougout();
   const handleClick = () => {
     lougoutentreprise();
+    navigate("/"); // Redirige vers l'accueil après la déconnexion
   };
 
-  const menuOptions = [
-    { text: "Acceuil", path: "./ent" },
-
-   
-  ];
 
   return (
     <nav>

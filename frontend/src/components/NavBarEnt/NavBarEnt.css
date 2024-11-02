@@ -69,6 +69,18 @@ nav {
     text-decoration: underline;
   }
   .logoutEnt-button{
-    margin-left: 1680px;
+    width: 100px; 
+    height: 40px; 
+    margin-left: auto; 
+    margin-right: 10px; 
     animation: none;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background-color: #d6415d;
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    box-sizing: border-box; 
   }
