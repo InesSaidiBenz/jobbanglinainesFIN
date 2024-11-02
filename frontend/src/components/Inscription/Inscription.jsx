@@ -77,7 +77,7 @@ const Inscription = () => {
  
 export default Inscription;
 
-
+//
 
 /*
 import React, { useState } from "react";
